@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [productForm, setproductForm] = useState({});
   const [products, setproducts] = useState({});
+  const [alert, setAlert] = useState("");
   useEffect(() => {
     const fetchproducts = async () => {
       const response = await fetch("/api/products");
@@ -28,7 +29,8 @@ export default function Home() {
 
       if (response.ok) {
         // Handle successful product addition
-        alert("Product added successfully!");
+        console.log("Product added successfully!");
+        setAlert("Your product has been added!");
         setproductForm({
           slug: "",
           price: "",
@@ -36,7 +38,7 @@ export default function Home() {
         });
       } else {
         // Handle error response
-        alert("Failed to add product. Please try again.");
+        console.error("Failed to add product. Please try again.");
       }
     } catch (error) {
       console.error("Error adding product:", error);
@@ -52,6 +54,7 @@ export default function Home() {
       <Header />
       {/* Search a Product Section */}
       <div className="container  mx-auto p-2">
+        <div className="text-green-500 text-center p-2">{alert}</div>
         <h1 className="text-2xl font-bold mb-6 text-center text-green-700">
           Search a Product
         </h1>
@@ -96,6 +99,7 @@ export default function Home() {
               Product Slug
             </label>
             <input
+              value={productForm?.slug || ""}
               onChange={handleChange}
               name="slug"
               type="text"
@@ -109,6 +113,7 @@ export default function Home() {
               Price
             </label>
             <input
+              value={productForm?.price || ""}
               onChange={handleChange}
               name="price"
               type="number"
@@ -122,6 +127,7 @@ export default function Home() {
               Quantity
             </label>
             <input
+              value={productForm?.quantity || ""}
               onChange={handleChange}
               name="quantity"
               type="number"
