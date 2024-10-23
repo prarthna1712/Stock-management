@@ -11,10 +11,9 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [dropdown, setDropdown] = useState([
     {
-      // _id: "6718a6131fbd8c0b4dd15955",
-      // slug: "iron machine",
-      // price: "500",
-      // quantity: "1",
+      // slug: "",
+      // price: "",
+      // quantity: "",
     },
   ]);
   useEffect(() => {
@@ -25,6 +24,7 @@ export default function Home() {
     };
     fetchproducts();
   }, []);
+
   const addproduct = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
@@ -60,11 +60,19 @@ export default function Home() {
     setproductForm({ ...productForm, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (query === "") {
+      setDropdown([]);
+      return;
+    }
+  });
+
   const onDropdownEdit = async (e) => {
     setQuery(e.target.value);
     if (!loading) {
       setLoading(true);
-      const response = await fetch("/api/search?query=" + query);
+      setDropdown([]);
+      const response = await fetch(`/api/search?query=${query}`);
       let rjson = await response.json();
       setDropdown(rjson.products);
       setLoading(false);
@@ -84,7 +92,7 @@ export default function Home() {
         <form className="mb-8">
           <div className="mb-4">
             <input
-              onClick={onDropdownEdit}
+              onChange={onDropdownEdit}
               type="text"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
               placeholder="Search by product name"
