@@ -7,6 +7,16 @@ export default function Home() {
   const [productForm, setproductForm] = useState({});
   const [products, setproducts] = useState({});
   const [alert, setAlert] = useState("");
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [dropdown, setDropdown] = useState([
+    {
+      // _id: "6718a6131fbd8c0b4dd15955",
+      // slug: "iron machine",
+      // price: "500",
+      // quantity: "1",
+    },
+  ]);
   useEffect(() => {
     const fetchproducts = async () => {
       const response = await fetch("/api/products");
@@ -49,6 +59,17 @@ export default function Home() {
   const handleChange = (e) => {
     setproductForm({ ...productForm, [e.target.name]: e.target.value });
   };
+
+  const onDropdownEdit = async (e) => {
+    setQuery(e.target.value);
+    if (!loading) {
+      setLoading(true);
+      const response = await fetch("/api/search?query=" + query);
+      let rjson = await response.json();
+      setDropdown(rjson.products);
+      setLoading(false);
+    }
+  };
   return (
     <>
       <Header />
@@ -63,10 +84,65 @@ export default function Home() {
         <form className="mb-8">
           <div className="mb-4">
             <input
+              onClick={onDropdownEdit}
               type="text"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
               placeholder="Search by product name"
             />
+            {loading && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "30vh",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{
+                    margin: "auto",
+                    background: "none",
+                    display: "block",
+                  }}
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="xMidYMid"
+                >
+                  <circle
+                    cx="50"
+                    cy="50"
+                    fill="none"
+                    stroke="#000000"
+                    strokeWidth="10"
+                    r="35"
+                    strokeDasharray="164.93361431346415 56.97787143782138"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      repeatCount="indefinite"
+                      dur="1s"
+                      values="0 50 50;360 50 50"
+                      keyTimes="0;1"
+                    />
+                  </circle>
+                </svg>
+              </div>
+            )}
+            {dropdown.map((item) => {
+              return (
+                <div
+                  key={item.slug}
+                  className="conatainer flex justify-between bg-purple-200 my-3"
+                >
+                  <span className="slug">{item.slug}</span>
+                  <span className="price">{item.price}</span>
+                  <span className="quantity">{item.quantity}</span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="mb-4">
