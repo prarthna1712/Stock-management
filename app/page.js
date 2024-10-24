@@ -154,9 +154,20 @@ export default function Home() {
                     key={item.slug}
                     className="conatainer flex justify-between  p-2 my-1 border-b-2"
                   >
-                    <span className="slug">{item.slug}</span>
-                    <span className="price">{item.price}</span>
-                    <span className="quantity">{item.quantity}</span>
+                    <span className="slug">
+                      {item.slug} ({item.quantity}) available for $ {item.price}
+                    </span>
+                    <div className="mx-5">
+                      <span className="substract inline-block px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
+                        {" "}
+                        -{" "}
+                      </span>
+                      <span className="quantity mx-3">{item.quantity}</span>
+                      <span className="add inline-block px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
+                        {" "}
+                        +{" "}
+                      </span>
+                    </div>
                   </div>
                 );
               })}
