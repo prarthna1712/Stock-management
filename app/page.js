@@ -103,7 +103,7 @@ export default function Home() {
               </div>
             )}
 
-            <div className="dropcontainer absolute w-full border bg-purple-100 rounded-md mt-2 shadow-lg">
+            <div className="dropcontainer absolute w-[96vw] border bg-purple-100 rounded-md mt-2 shadow-lg">
               {dropdown.map((item) => {
                 return (
                   <div
