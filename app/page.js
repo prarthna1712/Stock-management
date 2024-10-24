@@ -9,18 +9,8 @@ export default function Home() {
   const [alert, setAlert] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [dropdown, setDropdown] = useState([
-    {
-      slug: "sofaa",
-      price: "",
-      quantity: "",
-    },
-    {
-      slug: "motor",
-      price: "",
-      quantity: "",
-    },
-  ]);
+  const [dropdown, setDropdown] = useState([]);
+
   useEffect(() => {
     const fetchproducts = async () => {
       const response = await fetch("/api/products");
@@ -31,7 +21,7 @@ export default function Home() {
   }, []);
 
   const addproduct = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     try {
       const response = await fetch("/api/products", {
@@ -39,12 +29,10 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(productForm), // Convert product data to JSON format
+        body: JSON.stringify(productForm),
       });
 
       if (response.ok) {
-        // Handle successful product addition
-        console.log("Product added successfully!");
         setAlert("Your product has been added!");
         setproductForm({
           slug: "",
@@ -52,12 +40,10 @@ export default function Home() {
           quantity: "",
         });
       } else {
-        // Handle error response
         console.error("Failed to add product. Please try again.");
       }
     } catch (error) {
       console.error("Error adding product:", error);
-      alert("An error occurred while adding the product.");
     }
   };
 
@@ -83,89 +69,57 @@ export default function Home() {
       setLoading(false);
     }
   };
+
   return (
     <>
       <Header />
+
       {/* Search a Product Section */}
-      <div className="container  mx-auto p-2">
-        <div className="text-green-500 text-center p-2">{alert}</div>
-        <h1 className="text-2xl font-bold mb-6 text-center text-green-700">
+      <div className="container mx-auto p-6 bg-purple-50">
+        <div className="text-purple-600 text-center p-2">{alert}</div>
+        <h1 className="text-3xl font-semibold mb-6 text-center text-purple-800">
           Search a Product
         </h1>
 
-        {/* Search form with input and dropdown */}
         <form className="mb-8">
           <div className="mb-4">
             <input
-              onBlur={() => {
-                setDropdown([]);
-              }}
               onChange={onDropdownEdit}
               type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              className="shadow appearance-none border border-purple-400 rounded w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-purple-400"
               placeholder="Search by product name"
             />
             {loading && (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "30vh",
-                }}
-              >
+              <div className="flex justify-center items-center h-20">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  style={{
-                    margin: "auto",
-                    background: "none",
-                    display: "block",
-                  }}
-                  width="30px"
-                  height="30px"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="xMidYMid"
+                  className="animate-spin h-5 w-5 text-black-700"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
                 >
-                  <circle
-                    cx="50"
-                    cy="50"
-                    fill="none"
-                    stroke="#000000"
-                    strokeWidth="10"
-                    r="35"
-                    strokeDasharray="164.93361431346415 56.97787143782138"
-                  >
-                    <animateTransform
-                      attributeName="transform"
-                      type="rotate"
-                      repeatCount="indefinite"
-                      dur="1s"
-                      values="0 50 50;360 50 50"
-                      keyTimes="0;1"
-                    />
-                  </circle>
+                  <circle cx="12" cy="12" r="10" strokeWidth="4" />
                 </svg>
               </div>
             )}
-            <div className="dropcontainer absolute w-[98vw]  border-1 bg-purple-100 rounded-md">
+
+            <div className="dropcontainer absolute w-full border bg-purple-100 rounded-md mt-2 shadow-lg">
               {dropdown.map((item) => {
                 return (
                   <div
                     key={item.slug}
-                    className="conatainer flex justify-between  p-2 my-1 border-b-2"
+                    className="flex justify-between p-2 my-1 border-b border-purple-200"
                   >
-                    <span className="slug">
-                      {item.slug} ({item.quantity}) available for $ {item.price}
+                    <span>
+                      {item.slug} ({item.quantity}) available for ${item.price}
                     </span>
-                    <div className="mx-5">
-                      <span className="substract inline-block px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
-                        {" "}
-                        -{" "}
+                    <div className="flex">
+                      <span className="cursor-pointer px-2 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
+                        -
                       </span>
                       <span className="quantity mx-3">{item.quantity}</span>
-                      <span className="add inline-block px-3 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
-                        {" "}
-                        +{" "}
+                      <span className="cursor-pointer px-2 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
+                        +
                       </span>
                     </div>
                   </div>
@@ -175,7 +129,7 @@ export default function Home() {
           </div>
 
           <div className="mb-4">
-            <select className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700">
+            <select className="shadow border border-purple-400 rounded w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-purple-400">
               <option value="">Select Category</option>
               <option value="electronics">Electronics</option>
               <option value="clothing">Clothing</option>
@@ -186,7 +140,7 @@ export default function Home() {
 
           <button
             type="button"
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded"
           >
             Search
           </button>
@@ -194,13 +148,14 @@ export default function Home() {
       </div>
 
       {/* Add Product Section */}
-      <div className="container mx-auto p-2">
-        <h1 className="text-2xl font-bold mb-6 text-center">Add a Product</h1>
+      <div className="container mx-auto p-6 bg-purple-50">
+        <h1 className="text-3xl font-semibold mb-6 text-center text-purple-800">
+          Add a Product
+        </h1>
 
-        {/* Form for adding products (UI only) */}
         <form className="mb-8">
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-purple-700 text-sm font-bold mb-2">
               Product Slug
             </label>
             <input
@@ -208,13 +163,13 @@ export default function Home() {
               onChange={handleChange}
               name="slug"
               type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              className="shadow border border-purple-400 rounded w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-purple-400"
               placeholder="Enter product name"
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-purple-700 text-sm font-bold mb-2">
               Price
             </label>
             <input
@@ -222,13 +177,13 @@ export default function Home() {
               onChange={handleChange}
               name="price"
               type="number"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              className="shadow border border-purple-400 rounded w-[98vw] py-2 px-3 text-gray-700 focus:ring-2 focus:ring-purple-400"
               placeholder="Enter price"
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-purple-700 text-sm font-bold mb-2">
               Quantity
             </label>
             <input
@@ -236,7 +191,7 @@ export default function Home() {
               onChange={handleChange}
               name="quantity"
               type="number"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+              className="shadow border border-purple-400 rounded w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-purple-400"
               placeholder="Enter quantity"
             />
           </div>
@@ -244,7 +199,7 @@ export default function Home() {
           <button
             type="submit"
             onClick={addproduct}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded"
           >
             Add Product
           </button>
@@ -252,17 +207,19 @@ export default function Home() {
       </div>
 
       {/* Display Current Stock Section */}
-      <div className="container mx-auto p-2">
-        <h1 className="text-2xl font-bold mb-6 text-center">
+      <div className="container mx-auto p-6 bg-purple-50">
+        <h1 className="text-3xl font-semibold mb-6 text-center text-purple-800">
           Display Current Stock
         </h1>
-        <table className="min-w-full bg-white border border-gray-300">
-          <thead>
+        <table className="min-w-full bg-white border border-purple-300">
+          <thead className="bg-purple-100">
             <tr>
-              <th className="py-2 px-4 border-b">Product ID</th>
-              <th className="py-2 px-4 border-b">Product Name</th>
-              <th className="py-2 px-4 border-b">Price</th>
-              <th className="py-2 px-4 border-b">Quantity</th>
+              <th className="py-2 px-4 border-b text-purple-700">Product ID</th>
+              <th className="py-2 px-4 border-b text-purple-700">
+                Product Name
+              </th>
+              <th className="py-2 px-4 border-b text-purple-700">Price</th>
+              <th className="py-2 px-4 border-b text-purple-700">Quantity</th>
             </tr>
           </thead>
           <tbody>
