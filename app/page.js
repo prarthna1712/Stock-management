@@ -11,9 +11,14 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [dropdown, setDropdown] = useState([
     {
-      // slug: "",
-      // price: "",
-      // quantity: "",
+      slug: "sofaa",
+      price: "",
+      quantity: "",
+    },
+    {
+      slug: "motor",
+      price: "",
+      quantity: "",
     },
   ]);
   useEffect(() => {
@@ -92,6 +97,9 @@ export default function Home() {
         <form className="mb-8">
           <div className="mb-4">
             <input
+              onBlur={() => {
+                setDropdown([]);
+              }}
               onChange={onDropdownEdit}
               type="text"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
@@ -139,18 +147,20 @@ export default function Home() {
                 </svg>
               </div>
             )}
-            {dropdown.map((item) => {
-              return (
-                <div
-                  key={item.slug}
-                  className="conatainer flex justify-between bg-purple-200 my-3"
-                >
-                  <span className="slug">{item.slug}</span>
-                  <span className="price">{item.price}</span>
-                  <span className="quantity">{item.quantity}</span>
-                </div>
-              );
-            })}
+            <div className="dropcontainer absolute w-[98vw]  border-1 bg-purple-100 rounded-md">
+              {dropdown.map((item) => {
+                return (
+                  <div
+                    key={item.slug}
+                    className="conatainer flex justify-between  p-2 my-1 border-b-2"
+                  >
+                    <span className="slug">{item.slug}</span>
+                    <span className="price">{item.price}</span>
+                    <span className="quantity">{item.quantity}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="mb-4">
