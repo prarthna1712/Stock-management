@@ -61,7 +61,7 @@ export default function Home() {
 
   const onDropdownEdit = async (e) => {
     setQuery(e.target.value);
-    if (!loading) {
+    if (query.length > 1) {
       setLoading(true);
       setDropdown([]);
       const response = await fetch(`/api/search?query=${query}`);
