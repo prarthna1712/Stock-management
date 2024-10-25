@@ -23,8 +23,12 @@ const Header = () => {
             </span>
           </a>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <a className="mr-5 hover:text-gray-900">Home</a>
-            <a className="mr-5 hover:text-gray-900">Stock</a>
+            <a href="/" className="mr-5 hover:text-gray-900">
+              Home
+            </a>
+            <a href="/productDisplay" className="mr-5 hover:text-gray-900">
+              Stock
+            </a>
             <a className="mr-5 hover:text-gray-900">Location</a>
             <a className="mr-5 hover:text-gray-900">Contact</a>
           </nav>
