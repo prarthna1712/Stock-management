@@ -9,6 +9,7 @@ export default function Home() {
   const [alert, setAlert] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingaction, setLoadingaction] = useState(false);
   const [dropdown, setDropdown] = useState([]);
 
   useEffect(() => {
@@ -70,6 +71,27 @@ export default function Home() {
     }
   };
 
+  const buttonAction = async (action, slug, initialQuantity) => {
+    setLoadingaction(true);
+    const response = await fetch("/api/action", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ action, slug, initialQuantity }),
+    });
+    const result = await response.json();
+
+    if (result.success) {
+      setDropdown((prevDropdown) =>
+        prevDropdown.map((item) =>
+          item.slug === slug ? { ...item, quantity: result.newQuantity } : item
+        )
+      );
+    }
+    setLoadingaction(false);
+  };
+
   return (
     <>
       <Header />
@@ -114,13 +136,25 @@ export default function Home() {
                       {item.slug} ({item.quantity}) available for ${item.price}
                     </span>
                     <div className="flex">
-                      <span className="cursor-pointer px-2 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
+                      <button
+                        onClick={() => {
+                          buttonAction("minus", item.slug, item.quantity);
+                        }}
+                        disabled={loadingaction}
+                        className="cursor-pointer px-2 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
+                      >
                         -
-                      </span>
+                      </button>
                       <span className="quantity mx-3">{item.quantity}</span>
-                      <span className="cursor-pointer px-2 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
+                      <button
+                        onClick={() => {
+                          buttonAction("plus", item.slug, item.quantity);
+                        }}
+                        disabled={loadingaction}
+                        className="cursor-pointer px-2 py-1 bg-purple-500 text-white font-semibold rounded-lg shadow-md disabled:bg-purple-200"
+                      >
                         +
-                      </span>
+                      </button>
                     </div>
                   </div>
                 );
