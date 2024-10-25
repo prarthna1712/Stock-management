@@ -1,25 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import { useState, useEffect } from "react";
 
 export default function Home() {
   const [productForm, setproductForm] = useState({});
-  const [products, setproducts] = useState({});
+
   const [alert, setAlert] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingaction, setLoadingaction] = useState(false);
   const [dropdown, setDropdown] = useState([]);
-
-  useEffect(() => {
-    const fetchproducts = async () => {
-      const response = await fetch("/api/products");
-      let rjson = await response.json();
-      setproducts(rjson.products);
-    };
-    fetchproducts();
-  }, []);
 
   const addproduct = async (e) => {
     e.preventDefault();
@@ -58,6 +48,13 @@ export default function Home() {
       return;
     }
   });
+
+  useEffect(() => {
+    if (alert) {
+      const timer = setTimeout(() => setAlert(""), 5000); // Clear alert after 5 seconds
+      return () => clearTimeout(timer); // Clear timer on component unmount
+    }
+  }, [alert]);
 
   const onDropdownEdit = async (e) => {
     setQuery(e.target.value);
@@ -98,7 +95,6 @@ export default function Home() {
 
       {/* Search a Product Section */}
       <div className="container mx-auto p-6 bg-purple-50">
-        <div className="text-purple-600 text-center p-2">{alert}</div>
         <h1 className="text-3xl font-semibold mb-6 text-center text-purple-800">
           Search a Product
         </h1>
@@ -183,6 +179,8 @@ export default function Home() {
 
       {/* Add Product Section */}
       <div className="container mx-auto p-6 bg-purple-50">
+        {alert && <div className="text-purple-600  p-2 mb-4">{alert}</div>}
+
         <h1 className="text-3xl font-semibold mb-6 text-center text-purple-800">
           Add a Product
         </h1>
@@ -238,43 +236,6 @@ export default function Home() {
             Add Product
           </button>
         </form>
-      </div>
-
-      {/* Display Current Stock Section */}
-      <div className="container mx-auto p-6 bg-purple-50">
-        <h1 className="text-3xl font-semibold mb-6 text-center text-purple-800">
-          Display Current Stock
-        </h1>
-        <table className="min-w-full bg-white border border-purple-300">
-          <thead className="bg-purple-100">
-            <tr>
-              <th className="py-2 px-4 border-b text-purple-700">Product ID</th>
-              <th className="py-2 px-4 border-b text-purple-700">
-                Product Name
-              </th>
-              <th className="py-2 px-4 border-b text-purple-700">Price</th>
-              <th className="py-2 px-4 border-b text-purple-700">Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(products) && products.length > 0 ? (
-              products.map((product, index) => (
-                <tr key={product.slug}>
-                  <td className="py-2 px-4 border-b">{index + 1}</td>
-                  <td className="py-2 px-4 border-b">{product.slug}</td>
-                  <td className="py-2 px-4 border-b">${product.price}</td>
-                  <td className="py-2 px-4 border-b">{product.quantity}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4" className="py-2 px-4 border-b text-center">
-                  No products found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
       </div>
     </>
   );
