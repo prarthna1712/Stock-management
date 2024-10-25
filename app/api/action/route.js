@@ -11,7 +11,9 @@ export async function POST(request) {
     const inventory = database.collection("inventory");
     const filter = { slug: slug };
     let newQuantity =
-      action == "plus" ? initialQuantity + 1 : initialQuantity - 1;
+      action == "plus"
+        ? parseInt(initialQuantity) + 1
+        : parseInt(initialQuantity) - 1;
     const updateDoc = {
       $set: {
         quantity: newQuantity,
