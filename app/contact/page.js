@@ -40,6 +40,7 @@ export default function Contact() {
           // Add the new review to the top of the list
           setReviews([{ review, createdAt: new Date() }, ...reviews]);
           setReview("");
+          console.log("clear review");
         } else {
           console.error("Failed to save review");
         }
