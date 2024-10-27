@@ -10,10 +10,10 @@ export default function Contact() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("/api/reviews");
+        const response = await fetch("/api/review");
         if (response.ok) {
           const data = await response.json();
-          setReviews(data);
+          setReviews(data.review || []);
         }
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -29,7 +29,7 @@ export default function Contact() {
 
     if (review.trim()) {
       try {
-        const response = await fetch("/api/reviews", {
+        const response = await fetch("/api/review", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ review }),
@@ -65,7 +65,7 @@ export default function Contact() {
         </p>
 
         <h2 className="text-2xl font-semibold mb-4">Leave a Review</h2>
-        <form onSubmit={handleSubmit} className="mb-4">
+        <form className="mb-4">
           <textarea
             value={review}
             onChange={(e) => setReview(e.target.value)}
@@ -74,6 +74,7 @@ export default function Contact() {
             rows="4"
           ></textarea>
           <button
+            onClick={handleSubmit}
             type="submit"
             className="bg-purple-600 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded"
           >
