@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   let { action, slug, initialQuantity } = await request.json();
-  const uri =
-    "mongodb+srv://prarthanab1703:anahtrarP17@manage.ncqyr.mongodb.net/";
+  const uri = process.env.MONGODB_URI;
   const client = new MongoClient(uri);
   try {
     const database = client.db("stock");
