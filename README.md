@@ -33,22 +33,20 @@ To get this stock management application up and running, follow the steps below 
 
 graphql
 
-Copy code
-
-`project-root/
-├── app/                       # Next.js app directory
-│   ├── page.js                # Main Home page
-│   ├── products/              # Product-related pages and components
-│   ├── contact/               # Contact and feedback page
-├── components/                # Reusable UI components (e.g., navbar, mobile menu)
-├── lib/                       # Utility libraries
-├── public/                    # Static assets like images
-├── pages/api/                 # API route directory (acts as backend)
-│   ├── products.js            # Handles product-related API requests
-│   └── reviews.js             # Handles review-related API requests
-├── README.md                  # Project documentation
-├── package.json               # Project dependencies
-└── ...`
+project-root/
+├── app/ # Next.js app directory
+│ ├── page.js # Main Home page
+│ ├── products/ # Product-related pages and components
+│ ├── contact/ # Contact and feedback page
+├── components/ # Reusable UI components (e.g., navbar, mobile menu)
+├── lib/ # Utility libraries
+├── public/ # Static assets like images
+├── pages/api/ # API route directory (acts as backend)
+│ ├── products.js # Handles product-related API requests
+│ └── reviews.js # Handles review-related API requests
+├── README.md # Project documentation
+├── package.json # Project dependencies
+└── ...
 
 ---
 
@@ -68,22 +66,14 @@ This project requires the following tools installed on your system:
 
 Begin by cloning the repository using Git:
 
-bash
-
-Copy code
-
-`git clone https://github.com/prarthna1712/stock-management.git
-cd stock-management`
+git clone https://github.com/prarthna1712/stock-management.git
+cd stock-management
 
 ### 2. Install Dependencies
 
 Navigate to the project root directory and install the required Next.js dependencies:
 
-bash
-
-Copy code
-
-`npm install`
+npm install
 
 ---
 
@@ -91,11 +81,7 @@ Copy code
 
 To connect to MongoDB, create a `.env.local` file in the root directory and add the following environment variable for MongoDB connectivity:
 
-plaintext
-
-Copy code
-
-`MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<database>?retryWrites=true&w=majority`
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<database>?retryWrites=true&w=majority
 
 Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentials. Ensure the `.env.local` file is not pushed to version control to keep your credentials secure.
 
@@ -105,10 +91,6 @@ Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentia
 
 1.  **Starting the Frontend**  
     In the project root directory, run the Next.js development server:
-
-    bash
-
-    Copy code
 
     `npm run dev`
 
