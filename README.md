@@ -126,6 +126,7 @@ Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentia
 The example code below shows a `POST` request to add a new product:
 
 ```
+
 `fetch('/api/products', {
   method: 'POST',
   headers: {
@@ -138,6 +139,7 @@ The example code below shows a `POST` request to add a new product:
 })
   .then((response) => response.json())
   .then((data) => console.log(data));`
+
 ```
 
 ---
@@ -167,6 +169,10 @@ _Screenshots can be added here to visually demonstrate the app's features._
 3.  Commit your changes (`git commit -m 'Add YourFeature'`)
 4.  Push to the branch (`git push origin feature/YourFeature`)
 5.  Open a Pull Request
+
+```
+
+```
 
 ```
 
