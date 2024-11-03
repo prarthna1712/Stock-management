@@ -158,7 +158,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <select className="shadow border border-purple-400 rounded w-full py-2 px-3 text-gray-700 focus:ring-2 focus:ring-purple-400">
               <option value="">Select Category</option>
               <option value="electronics">Electronics</option>
@@ -166,7 +166,7 @@ export default function Home() {
               <option value="furniture">Furniture</option>
               <option value="beauty">Beauty</option>
             </select>
-          </div>
+          </div> */}
 
           <button
             type="button"
