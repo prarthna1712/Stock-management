@@ -66,14 +66,18 @@ This project requires the following tools installed on your system:
 
 Begin by cloning the repository using Git:
 
+```
 git clone https://github.com/prarthna1712/stock-management.git
 cd stock-management
+```
 
 ### 2. Install Dependencies
 
 Navigate to the project root directory and install the required Next.js dependencies:
 
+```
 npm install
+```
 
 ---
 
@@ -81,7 +85,9 @@ npm install
 
 To connect to MongoDB, create a `.env.local` file in the root directory and add the following environment variable for MongoDB connectivity:
 
+```
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<database>?retryWrites=true&w=majority
+```
 
 Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentials. Ensure the `.env.local` file is not pushed to version control to keep your credentials secure.
 
@@ -92,7 +98,9 @@ Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentia
 1.  **Starting the Frontend**
     In the project root directory, run the Next.js development server:
 
+```
     `npm run dev`
+```
 
     By default, the frontend should be available at `http://localhost:3000`.
 
@@ -117,10 +125,7 @@ Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentia
 
 The example code below shows a `POST` request to add a new product:
 
-javascript
-
-Copy code
-
+```
 `fetch('/api/products', {
   method: 'POST',
   headers: {
@@ -133,6 +138,7 @@ Copy code
 })
   .then((response) => response.json())
   .then((data) => console.log(data));`
+```
 
 ---
 
@@ -149,11 +155,6 @@ Copy code
 ## Screenshots
 
 Here are some screenshots showcasing different parts of the application:
-
-1.  **Home Page**: Shows an overview of the stock inventory.
-2.  **Product Search**: Dynamic search functionality for finding specific products.
-3.  **Review Section**: Submit and display user reviews.
-4.  **Responsive Navigation**: Responsive navbar using Tailblock components.
 
 _Screenshots can be added here to visually demonstrate the app's features._
 
