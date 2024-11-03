@@ -158,7 +158,9 @@ The example code below shows a `POST` request to add a new product:
 
 Here are some screenshots showcasing different parts of the application:
 
-_Screenshots can be added here to visually demonstrate the app's features._
+### Home Page
+
+![Home Page](./screenshots/home.png)
 
 ---
 
