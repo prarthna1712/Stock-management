@@ -31,8 +31,6 @@ To get this stock management application up and running, follow the steps below 
 
 ## Project Structure
 
-graphql
-
 project-root/
 ├── app/ # Next.js app directory
 │ ├── page.js # Main Home page
