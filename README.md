@@ -162,6 +162,10 @@ Here are some screenshots showcasing different parts of the application:
 
 ![Home Page](./screenshots/Home.png)
 
+![Stock page](./screenshots/stock.png)
+
+![contact page](./screenshots/contact.png)
+
 ---
 
 ## Contributing
