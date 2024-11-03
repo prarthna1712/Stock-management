@@ -160,7 +160,7 @@ Here are some screenshots showcasing different parts of the application:
 
 ### Home Page
 
-![Home Page](./screenshots/home.png)
+![Home Page](./screenshots/Home.png)
 
 ---
 
