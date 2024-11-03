@@ -179,11 +179,3 @@ Here are some screenshots showcasing different parts of the application:
 3.  Commit your changes (`git commit -m 'Add YourFeature'`)
 4.  Push to the branch (`git push origin feature/YourFeature`)
 5.  Open a Pull Request
-
-```
-
-```
-
-```
-
-```
