@@ -31,19 +31,20 @@ To get this stock management application up and running, follow the steps below 
 
 ## Project Structure
 
+```plaintext
 project-root/
-├── app/ # Next.js app directory
-│ ├── page.js # Main Home page
-│ ├── products/ # Product-related pages and components
-│ ├── contact/ # Contact and feedback page
-├── components/ # Reusable UI components (e.g., navbar, mobile menu)
-├── lib/ # Utility libraries
-├── public/ # Static assets like images
-├── pages/api/ # API route directory (acts as backend)
-│ ├── products.js # Handles product-related API requests
-│ └── reviews.js # Handles review-related API requests
-├── README.md # Project documentation
-├── package.json # Project dependencies
+├── app/                       # Next.js app directory
+│   ├── page.js                # Main Home page
+│   ├── products/              # Product-related pages and components
+│   ├── contact/               # Contact and feedback page
+├── components/                # Reusable UI components (e.g., navbar, mobile menu)
+├── lib/                       # Utility libraries
+├── public/                    # Static assets like images
+├── pages/api/                 # API route directory (acts as backend)
+│   ├── products.js            # Handles product-related API requests
+│   └── reviews.js             # Handles review-related API requests
+├── README.md                  # Project documentation
+├── package.json               # Project dependencies
 └── ...
 
 ---
@@ -87,14 +88,14 @@ Replace `<username>`, `<password>`, and `<database>` with your MongoDB credentia
 
 ## Running the Application
 
-1.  **Starting the Frontend**  
+1.  **Starting the Frontend**
     In the project root directory, run the Next.js development server:
 
     `npm run dev`
 
     By default, the frontend should be available at `http://localhost:3000`.
 
-2.  **API Routes**  
+2.  **API Routes**
     Next.js API routes (located in `pages/api/`) handle requests for managing products and reviews, eliminating the need for a separate backend server. The API routes will automatically be available at endpoints like `http://localhost:3000/api/products` and `http://localhost:3000/api/reviews`.
 
 ---
@@ -164,3 +165,4 @@ _Screenshots can be added here to visually demonstrate the app's features._
 3.  Commit your changes (`git commit -m 'Add YourFeature'`)
 4.  Push to the branch (`git push origin feature/YourFeature`)
 5.  Open a Pull Request
+```
