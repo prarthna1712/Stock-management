@@ -46,6 +46,7 @@ project-root/
 ├── README.md                  # Project documentation
 ├── package.json               # Project dependencies
 └── ...
+```
 
 ---
 
@@ -165,4 +166,7 @@ _Screenshots can be added here to visually demonstrate the app's features._
 3.  Commit your changes (`git commit -m 'Add YourFeature'`)
 4.  Push to the branch (`git push origin feature/YourFeature`)
 5.  Open a Pull Request
+
+```
+
 ```
